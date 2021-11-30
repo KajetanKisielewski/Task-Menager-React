@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --mode development --open",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "api": "json-server --watch ./db/data.json --port 3005"
   },
   "keywords": [],
   "author": "",
@@ -21,9 +22,15 @@
     "style-loader": "^2.0.0",
     "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "whatwg-fetch": "^3.6.2"
   },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
   "dependencies": {
+    "json-server": "^0.17.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }

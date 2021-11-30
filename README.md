@@ -1,6 +1,6 @@
 > ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+>
+> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.*
 
 &nbsp;
 
@@ -25,7 +25,7 @@ Dopiero teraz możemy dodać to zadanie do naszej listy (`this.state.tasks`). Pa
 ```js
 const newItem = {
     name: 'Zadanie 1',
-    // ... 
+    // ...
 };
 
 this.setState(state => {
@@ -98,7 +98,7 @@ Powyższa struktura powinna być generowana na podstawie danych z wartości `thi
 
 Na razie nie dziel swojego komponentu na mniejsze części, ponieważ niepotrzebnie skomplikuje to implementację.
 
-W następnym materiale poznasz techniki, które Ci w takim podziale pomogą i pozwolą odpowiednio przekazywać dane pomiędzy komponentami. 
+W następnym materiale poznasz techniki, które Ci w takim podziale pomogą i pozwolą odpowiednio przekazywać dane pomiędzy komponentami.
 
 ### CSS
 
@@ -156,12 +156,30 @@ Od teraz możesz korzystać z API pod adresem:
 http://localhost:3005/data
 ```
 
-> **Uwaga!** Jeśli API ma działać, json-server zawsze musi być uruchomiony. 
+> **Uwaga!** Jeśli API ma działać, json-server zawsze musi być uruchomiony.
 
 
 
 &nbsp;
 
 > ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
-> 
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+>
+> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.*
+
+
+
+
+Przydatne linki:
+
+jak dodać zdjęcia do webpack:
+
+https://stackoverflow.com/questions/37671342/how-to-load-image-files-with-webpack-file-loader
+
+wsparcie fetch dla starszych przeglaadrek ()
+
+https://github.com/github/fetch
+
+autuzupelnianie:
+
+https://stackoverflow.com/questions/39320393/jsx-or-html-autocompletion-in-visual-studio-code
+
