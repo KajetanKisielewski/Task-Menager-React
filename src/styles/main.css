@@ -1,3 +1,127 @@
-body {
-    background: #dcdcdc;
+:root {
+    font-size: 10px;
+    --backgroundColor: linear-gradient(to left bottom, #023047, #07435d, #0d5673, #126b89, #18809f, #18809f, #18809f, #18809f, #126b89, #0d5673, #07435d, #023047);
+    --appPanelColor: rgba(2, 48, 71, 0.6);
+    --textColor: rgb(255,255,255);
+    --borderColor: rgb(33, 158, 188);
+    --taskContainerColor: rgba(142, 202, 230, 0.3);
+    --taskBorderColor: rgb(142, 202, 230);
+    --iconColor: rgb(255, 183, 3);
+
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+#root {
+    min-height: 100vh;
+    background: var(--backgroundColor)
+}
+
+.task__app {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-height: 80vh;
+    border-radius: 2rem;
+    background: var(--appPanelColor);
+    text-align: center;
+}
+
+.task__app--title {
+    margin: 3rem 0;
+    color: var(--textColor);
+    font-size: 2.5rem;
+}
+
+.task__app--form {
+    margin: 3rem 0;
+}
+
+.form__input {
+  width: 50%;
+  padding: 1.5rem 3rem;
+  border: 2px solid var(--borderColor);
+  border-radius: 4px 0 0 4px;
+  background: transparent;
+  color: var(--textColor);
+  outline: none;
+}
+
+.form__input::placeholder {
+    color: var(--textColor)
+}
+
+.form__submit {
+    padding: 17px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background: var(--borderColor);
+    color: var(--textColor);
+    cursor: pointer;
+}
+
+.content__task {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+}
+
+.task__header,
+.task__footer {
+    flex-basis: 0;
+    background: var(--taskContainerColor);
+    border: 2px solid var(--taskBorderColor);
+    color: var(--textColor);
+    font-size: 2rem;
+}
+
+.task__header {
+    flex-grow: 4;
+    display:flex;
+    justify-content: space-between;
+    padding: 2.4rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    text-align: left;
+}
+
+.task__header--name {
+    flex-grow: 3;
+    flex-basis: 0;
+}
+
+.task__header--time {
+    text-align: right;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.task__footer {
+    flex-grow: 1;
+    padding: 2rem;
+    border-left: none;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.footer__button {
+    background: transparent;
+    border: none;
+}
+.icon {
+    color: var(--iconColor);
+    margin: 0 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.fa-clock {
+    cursor: default;
 }

@@ -4,7 +4,8 @@ export default class Api {
     }
 
     loadData() {
-        return this._fetch(this.url);
+        const options = { method: 'GET' };
+        return this._fetch( options , this.url );
     }
 
 
