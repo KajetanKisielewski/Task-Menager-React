@@ -165,3 +165,32 @@ http://localhost:3005/data
 > ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
 >
 > 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.*
+
+
+
+
+Przydatne linki:
+
+jak dodać zdjęcia do webpack:
+
+https://stackoverflow.com/questions/37671342/how-to-load-image-files-with-webpack-file-loader
+
+wsparcie fetch dla starszych przeglaadrek ()
+
+https://github.com/github/fetch
+
+autuzupelnianie:
+
+https://stackoverflow.com/questions/39320393/jsx-or-html-autocompletion-in-visual-studio-code
+
+validacja :
+
+https://stackoverflow.com/questions/18065807/regular-expression-for-removing-whitespaces
+
+
+
+
+
+Nazwa : minimum 3 znaki
+- oddzielnic walidacje od matchowania
+
