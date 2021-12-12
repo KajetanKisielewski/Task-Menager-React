@@ -2,7 +2,7 @@
     font-size: 10px;
     --backgroundColor: linear-gradient(to left bottom, #023047, #07435d, #0d5673, #126b89, #18809f, #18809f, #18809f, #18809f, #126b89, #0d5673, #07435d, #023047);
     --appPanelColor: rgba(2, 48, 71, 0.6);
-    --textColor: rgb(255,255,255);
+    --textColor: rgb(255, 255, 255);
     --borderColor: rgb(33, 158, 188);
     --taskContainerColor: rgba(142, 202, 230, 0.3);
     --taskBorderColor: rgb(142, 202, 230);
@@ -26,7 +26,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%);
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -47,13 +47,13 @@
 }
 
 .form__input {
-  width: 50%;
-  padding: 1.5rem 3rem;
-  border: 2px solid var(--borderColor);
-  border-radius: 4px 0 0 4px;
-  background: transparent;
-  color: var(--textColor);
-  outline: none;
+    width: 50%;
+    padding: 1.5rem 3rem;
+    border: 2px solid var(--borderColor);
+    border-radius: 4px 0 0 4px;
+    background: transparent;
+    color: var(--textColor);
+    outline: none;
 }
 
 .form__input::placeholder {
@@ -70,9 +70,9 @@
 }
 
 .content__task {
-  display: flex;
-  justify-content: space-between;
-  margin: 2rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
 }
 
 .task__header,
@@ -86,8 +86,9 @@
 
 .task__header {
     flex-grow: 4;
-    display:flex;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 2.4rem;
     border-radius: 0.5rem 0 0 0.5rem;
     text-align: left;
@@ -106,7 +107,7 @@
 
 .task__footer {
     flex-grow: 1;
-    padding: 2rem;
+    padding: 1rem;
     border-left: none;
     border-radius: 0 0.5rem 0.5rem 0;
 }
@@ -115,8 +116,10 @@
     background: transparent;
     border: none;
 }
+
 .icon {
     color: var(--iconColor);
+    padding: 1rem 0;
     margin: 0 1rem;
     font-size: 2rem;
     cursor: pointer;

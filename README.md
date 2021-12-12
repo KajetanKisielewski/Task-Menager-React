@@ -188,9 +188,6 @@ validacja :
 https://stackoverflow.com/questions/18065807/regular-expression-for-removing-whitespaces
 
 
-
-
-
-Nazwa : minimum 3 znaki
-- oddzielnic walidacje od matchowania
+- rozjezdza sie apka jak za duzo taskow,
+- wielozadaniowosc - poprawic
 

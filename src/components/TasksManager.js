@@ -13,7 +13,7 @@ export default class TasksManager extends React.Component {
 
     render() {
 
-        console.log(this.state);
+        // console.log(this.state);
 
         const { text } = this.state;
 
@@ -54,9 +54,12 @@ export default class TasksManager extends React.Component {
 
     renderTasksList = () => {
 
-        const { tasks } = this.state;
+        // const { tasks } = this.state;
 
-        return tasks.map(task => {
+        const activeTasks = this.state.tasks.filter(task => task.isRemoved === false);
+        const sortedTasks = this.sortedTasks(activeTasks)
+
+        return sortedTasks.map(task => {
             return (
                 this.createTaskTemplate(task)
             );
@@ -87,7 +90,12 @@ export default class TasksManager extends React.Component {
                     >
                         <i className="icon fas fa-stop"></i>
                     </button>
-
+                    <button
+                        className="footer__button"
+                        onClick={() => { this.doneTask(task.id) }}
+                    >
+                        <i className="icon fas fa-check"></i>
+                    </button>
                     <button
                         className="footer__button"
                         onClick={() => { this.delateTask(task.id) }}
@@ -100,10 +108,32 @@ export default class TasksManager extends React.Component {
         );
     };
 
-    delateTask = (id) => {
+
+    sortedTasks = (task) => {
+        return task.sort((a, b) => a.isDone - b.isDone)
+    }
+
+    doneTask = (id) => {
         this.setState(state => {
             const newTask = state.tasks.map(task => {
                 if (task.id === id) {
+                    const doneTask = { ...task, isDone: true };
+                    this.updateApiData(doneTask)
+                    return doneTask;
+                }
+                return task;
+            })
+            return {
+                tasks: newTask,
+            }
+        })
+        this.stopTask(id)
+    }
+
+    delateTask = (id) => {
+        this.setState(state => {
+            const newTask = state.tasks.map(task => {
+                if (task.id === id & task.isDone === true) {
                     const delateTask = { ...task, isRemoved: true };
                     this.updateApiData(delateTask)
                     return delateTask;
@@ -115,7 +145,6 @@ export default class TasksManager extends React.Component {
             }
         })
     }
-
 
     startTask = (id) => {
         this.idInterval = setInterval(() => {
