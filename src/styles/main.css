@@ -6,7 +6,9 @@
     --borderColor: rgb(33, 158, 188);
     --taskContainerColor: rgba(142, 202, 230, 0.3);
     --taskBorderColor: rgb(142, 202, 230);
+    --doneTaskBorderColor: rgb(91, 248, 112);
     --iconColor: rgb(255, 183, 3);
+    --inactiveIconColor: rgba(255, 183, 3, 0.4);
 
 }
 
@@ -84,6 +86,7 @@
     font-size: 2rem;
 }
 
+
 .task__header {
     flex-grow: 4;
     display: flex;
@@ -112,6 +115,11 @@
     border-radius: 0 0.5rem 0.5rem 0;
 }
 
+.task__header--done,
+.task__footer--done {
+    border: 2px solid var(--doneTaskBorderColor);
+}
+
 .footer__button {
     background: transparent;
     border: none;
@@ -123,6 +131,10 @@
     margin: 0 1rem;
     font-size: 2rem;
     cursor: pointer;
+}
+
+.icon--inactive {
+    color: var(--inactiveIconColor)
 }
 
 .fa-clock {

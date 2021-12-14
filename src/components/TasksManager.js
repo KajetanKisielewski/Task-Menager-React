@@ -13,14 +13,11 @@ export default class TasksManager extends React.Component {
 
     render() {
 
-        // console.log(this.state);
-
         const { text } = this.state;
 
         return (
             <section className="task__app">
                 <h1 className="task__app--title">Welcome to Tasks Manager</h1>
-
                 <section className="task__app--form">
                     <form className="form__wrapper" onSubmit={this.handleSubmit}>
                         <input
@@ -37,7 +34,6 @@ export default class TasksManager extends React.Component {
                 <main className="task__app--content">
                     {this.renderTasksList()};
                 </main>
-
             </section>
         )
     }
@@ -54,8 +50,6 @@ export default class TasksManager extends React.Component {
 
     renderTasksList = () => {
 
-        // const { tasks } = this.state;
-
         const activeTasks = this.state.tasks.filter(task => task.isRemoved === false);
         const sortedTasks = this.sortedTasks(activeTasks)
 
@@ -66,48 +60,95 @@ export default class TasksManager extends React.Component {
         });
     };
 
-
     createTaskTemplate = (task) => {
 
         return (
             <section className="content__task">
-                <header className="task__header">
+                <header className={this.setTaskClassHeader(task)}>
                     <span className="task__header--name"> {task.name} </span>
                     <span className="task__header--time"><i className="icon far fa-clock"></i> {task.time} </span>
                 </header>
-                <footer className="task__footer">
+                <footer className={this.setTaskClassFooter(task)}>
                     <button
                         className="footer__button"
                         onClick={() => this.startTask(task.id)}
-                        disabled={this.TimeButtonDisable(task)}
+                        disabled={this.setTimeButtonDisable(task, false)}
                     >
-                        <i className="icon start fas fa-play"></i>
+                        <i className={this.setStartIconClass(task)}></i>
                     </button>
                     <button
                         className="footer__button"
                         onClick={() => this.stopTask(task.id)}
-                        disabled={!this.TimeButtonDisable(task)}
+                        disabled={!this.setTimeButtonDisable(task, true)}
                     >
-                        <i className="icon fas fa-stop"></i>
+                        <i className={this.setStopIconClass(task)}></i>
                     </button>
                     <button
                         className="footer__button"
                         onClick={() => { this.doneTask(task.id) }}
+                        disabled={this.setDoneButtonDisable(task)}
                     >
-                        <i className="icon fas fa-check"></i>
+                        <i className={this.setDoneIconClass(task)}></i>
                     </button>
                     <button
                         className="footer__button"
                         onClick={() => { this.delateTask(task.id) }}
-                        disabled={false}
+                        disabled={this.setDelateButtonDisable(task)}
                     >
-                        <i className="icon fas fa-trash-alt"></i>
+                        <i className={this.setDelateIconClass(task)}></i>
                     </button>
                 </footer>
             </section>
         );
     };
 
+    setTaskClassHeader = (task) => {
+        if (task.isDone === false) { return "task__header" }
+        return "task__header task__header--done"
+    }
+
+    setTaskClassFooter = (task) => {
+        if (task.isDone === false) { return "task__footer" }
+        return "task__footer task__footer--done"
+    }
+
+    setStartIconClass = (task) => {
+        if (task.isRunning === false && task.isDone === true) { return "icon fas fa-play icon--inactive" }
+        else if (task.isRunning === true) { return "icon fas fa-play icon--inactive" }
+        return "icon fas fa-play"
+    }
+
+    setStopIconClass = (task) => {
+        if (task.isRunning === true) { return "icon fas fa-stop" }
+        return "icon fas fa-stop icon--inactive"
+    }
+
+    setDoneIconClass = (task) => {
+        if (task.isRunning === true || task.time > 0) { return "icon fas fa-check" }
+        return "icon fas fa-check icon--inactive"
+    }
+
+    setDelateIconClass = (task) => {
+        if (task.isDone === true) { return "icon fas fa-trash" }
+        return "icon fas fa-trash icon--inactive"
+    }
+
+    setStartButtonDisable = (task) => {
+        return (this.idInterval && task.isRunning === false || task.isDone === true) ? true : false;
+    }
+
+    setTimeButtonDisable = (task, isRunningValue) => {
+        if (this.idInterval && task.isRunning === isRunningValue || task.isDone === true) { return true }
+        else if (task.isRunning === true) { return true }
+    }
+
+    setDoneButtonDisable = (task) => {
+        return (this.idInterval && task.isRunning === true || task.time > 0) ? false : true;
+    }
+
+    setDelateButtonDisable = (task) => {
+        return (task.isDone === true) ? false : true;
+    }
 
     sortedTasks = (task) => {
         return task.sort((a, b) => a.isDone - b.isDone)
@@ -116,7 +157,7 @@ export default class TasksManager extends React.Component {
     doneTask = (id) => {
         this.setState(state => {
             const newTask = state.tasks.map(task => {
-                if (task.id === id) {
+                if (task.id === id && task.time > 0) {
                     const doneTask = { ...task, isDone: true };
                     this.updateApiData(doneTask)
                     return doneTask;
@@ -133,7 +174,7 @@ export default class TasksManager extends React.Component {
     delateTask = (id) => {
         this.setState(state => {
             const newTask = state.tasks.map(task => {
-                if (task.id === id & task.isDone === true) {
+                if (task.id === id && task.isDone === true) {
                     const delateTask = { ...task, isRemoved: true };
                     this.updateApiData(delateTask)
                     return delateTask;
@@ -155,6 +196,8 @@ export default class TasksManager extends React.Component {
     stopTask = (id) => {
         clearInterval(this.idInterval);
         this.incrementTime(id, false, 0)
+        this.idInterval = null;
+
     }
 
     incrementTime(id, isRunningValue, incrementValue) {
@@ -177,11 +220,6 @@ export default class TasksManager extends React.Component {
         this.api.updateData(task, task.id)
             .then(() => this.loadApiData())
     }
-
-    TimeButtonDisable = (task) => {
-        return task.isRunning ? true : false;
-    }
-
 
     handleSubmit = (e) => {
         e.preventDefault();
