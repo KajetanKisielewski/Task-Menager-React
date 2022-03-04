@@ -1,193 +1,73 @@
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
->
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.*
-
-&nbsp;
-
-
 # TasksManager
 
-## Wprowadzenie
+## Overview 🔍
 
-Tym razem stworzymy jeden komponent, który będzie zarządzał naszymi zadaniami.
+![](./src/img/Animation.gif)
 
-Będzie to rozwiązanie, które pozwoli tworzyć zadania i liczyć czas ich wykonania.
+The aim of the project was to create a task management application. Communication is via local api (JSON Server).
 
-## Implementacja
+### Features:
 
-### Dodawanie zadań
+- **Adding tasks**
+- **Task management:**
+    - **start the countdown**
+    - **stop the countdown**  (if it has been start before)
+    - **end a task** (will move it to the end of the list)
+    - **delate a task** (will cause the task not to be render but will be store in state)
 
-Należy stworzyć formularz, który pozwoli na dodawanie nowych zadań. Ma to być komponent kontrolowany – do pól formularza muszą być przypisane wartości ze state (`<input name="task" value={ this.state.task } onChange={ ... } />`) i obsługa zdarzenia `onChange`.
 
-Potwierdzenie formularza (`onSubmit`) ma skutkować wysłaniem zadania do lokalnego API stworzonego przy pomocy [json-servera](https://github.com/typicode/json-server). Po dodaniu zadania otrzymujemy odpowiedź od serwera – jest to ID nowo utworzonego elementu.
+## Built with 🔧
 
-Dopiero teraz możemy dodać to zadanie do naszej listy (`this.state.tasks`). Pamiętaj, aby za każdym razem, kiedy dodajesz nowy element, tworzyć kopię poprzedniej tablicy:
-```js
-const newItem = {
-    name: 'Zadanie 1',
-    // ...
-};
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white)
+![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white)
+![BEM Methodology](https://img.shields.io/badge/BEM%20Methodology-29BDfD?style=for-the-badge&logo=BEM&logoColor=white)
+![JSON Server](https://img.shields.io/badge/JSON%20Server-6f736d?style=for-the-badge&logo=JSON&logoColor=white)
+![REST API](https://img.shields.io/badge/REST%20API-4f736d?style=for-the-badge&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.JS-339933?style=for-the-badge&logo=Node.js&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
-this.setState(state => {
-    return {
-        tasks: [...state.tasks, newItem],
-    }
-});
-```
-### Dane pojedynczego zadania
+## Installation and configuration 💾
 
-Każde z zadań powinno posiadać:
-- nazwę (`name`)
-- ID (`id`), które jest zwracane przez API
-- czas jego wykonywania w sekundach (`time`)
-- informację, czy czas jest odliczany w danym momencie (`isRunning`)
-- czy zadanie zostało już wykonane (`isDone`)
-- czy zostało usunięte (`isRemoved`).
+The project uses [node](https://nodejs.org/en/) and [npm](https://www.npmjs.com/), follow the steps below to be able to use the application.
 
-### Funkcjonalności
+- Install all npm packages using command:
+````
+npm i
+````
 
-W każdym zadaniu powinniśmy mieć możliwość:
-- rozpoczęcia odliczania
-- zatrzymania odliczania, jeśli zostało wcześniej rozpoczęte
-- zakończenia zadania, co spowoduje przeniesienie go na koniec listy (można wykorzystać [.sort()](https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Array/sort))
-- usunięcia z listy, co spowoduje, że zadanie nie zostanie wyrenderowane, ale będzie cały czas przechowywane w state (można wykorzystać [.filter()](https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Array/filter)).
+- To start develope mode use command:
 
-Uznajemy, że w jednym momencie możemy wykonywać jedno zadanie.
+````
+npm start
+````
+- If you don't have JSON server installed on your device use command:
+````
+npm install json-server -g
+````
 
-Wciśnięcie przycisku `zakończone` powinno jednocześnie zatrzymywać naliczanie czasu.
+- To run JSON server use command:
+````
+npm run api
+````
 
-Usunięcie zadania ma być możliwe dopiero po jego zakończeniu (uznajemy, że nie ma omyłkowo dodanych zadań).
+- From now on, the application is available at:
 
-Każda zmiana danych zadania (odliczanie, wstrzymanie, zakończenie itp.) powinna być zapisywana w API.
+````
+http://localhost:8080
+````
 
-Pamiętaj również, że zmiana w `state` musi odbywać się przez utworzenie kopii obiektu i dopiero potem jego aktualizację, np.
-
-```js
-incrementTime(id) {
-    this.setState(state => {
-        const newTasks = state.tasks.map(task => {
-            if(task.id === id) {
-                return {...task, time: task.time + 1}
-            }
-
-            return task;
-        });
-
-        return {
-            tasks: newTasks,
-        }
-    });
-}
-```
-
-Każde zadanie powinno mieć strukturę zbliżoną do tej poniżej. Pamiętaj, że część przycisków musi się zachowywać zgodnie z obecnym stanem aplikacji (np. w pewnym momencie być nieaktywna).
-```html
-<section>
-    <header>Zadanie 1, 00:00:00</header>
-    <footer>
-        <button>start/stop</button>
-        <button>zakończone</button>
-        <button disabled="true">usuń</button>
-    </footer>
-</section>
-```
-
-Powyższa struktura powinna być generowana na podstawie danych z wartości `this.state.tasks` oraz przy pomocy [.map()](https://developer.mozilla.org/pl/docs/Web/JavaScript/Referencje/Obiekty/Array/map).
-
-### Uwaga
-
-Na razie nie dziel swojego komponentu na mniejsze części, ponieważ niepotrzebnie skomplikuje to implementację.
-
-W następnym materiale poznasz techniki, które Ci w takim podziale pomogą i pozwolą odpowiednio przekazywać dane pomiędzy komponentami.
-
-### CSS
-
-Do konfiguracji webpacka (w pliku `webpack.config.js`) dodano obsługę plików CSS, dlatego możesz odpowiednio ostylować swoje rozwiązanie, wykorzystując klasy i metodologię [BEM](http://getbem.com/).
-
-Zauważ, że w `./src/app.js` importowany jest plik CSS. Dzięki temu rozwiązaniu webpack pobierze zawartość tego pliku i do `index.html` doda CSS jako znacznik `<style/>` w `<head/>`.
-
-#### Dodatkowe zasoby w CSS-ie
-
-Aby webpack odpowiednio czytał zdjęcia lub fonty w CSS-ie, należy zmodyfikować konfigurację.
-
-Możesz to uznać za zadanie dodatkowe lub poczekać na omówienie tego tematu w kolejnych materiałach.
-
-### JSON Server – przypomnienie
-
-Paczka `json-server` powinna być zainstalowana globalnie, dlatego warto mieć uprawnienia administratora (sudo na Linuksie), aby móc to zrobić.
-
-W terminalu wpisz komendę:
-
-```
-npm install -g json-server@0.17
-```
-
-Po instalacji powinieneś mieć dostęp do informacji o zainstalowanej wersji:
-
-```
-json-server -v
-```
-
-Teraz w katalogu głównym naszej aplikacji utwórz katalog `db`, a w nim plik `data.json` i wrzuć do niego testowe dane, np.:
-
-```javascript
-{
-    "data": [
-        {
-            "id": 1,
-            "firstName": "Jan",
-            "lastName": "Kowalski"
-        }
-    ]
-}
-```
-
-Jeśli masz już uruchomionego webpacka (`npm start`), to w kolejnym terminalu (wierszu poleceń) uruchom API:
-
-```
-json-server --watch ./db/data.json --port 3005
-```
-
-Ustawiamy inny port niż domyślny (3000), aby być pewnym, że nic go nie blokuje.
-
-Od teraz możesz korzystać z API pod adresem:
-
-```
+* Databse is available at:
+````
 http://localhost:3005/data
-```
+````
 
-> **Uwaga!** Jeśli API ma działać, json-server zawsze musi być uruchomiony.
+## Author 🔥
+* Github - [KajetanKisielewski](https://github.com/KajetanKisielewski),
+* Linkedin - [KajetanKisielewski](https://www.linkedin.com/in/kajetan-kisielewski-157b60208/).
 
-
-
-&nbsp;
-
-> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
->
-> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.*
-
-
-
-
-Przydatne linki:
-
-jak dodać zdjęcia do webpack:
-
-https://stackoverflow.com/questions/37671342/how-to-load-image-files-with-webpack-file-loader
-
-wsparcie fetch dla starszych przeglaadrek ()
-
-https://github.com/github/fetch
-
-autuzupelnianie:
-
-https://stackoverflow.com/questions/39320393/jsx-or-html-autocompletion-in-visual-studio-code
-
-validacja :
-
-https://stackoverflow.com/questions/18065807/regular-expression-for-removing-whitespaces
-
-
-- rozjezdza sie apka jak za duzo taskow,
-- wielozadaniowosc - poprawic
-
+## Special thanks 🙏🏻
+Thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) - for providing me with this task and for code review.
